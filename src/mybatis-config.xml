@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias type="ldg.mybatis.model.User" alias="User" />
+		<typeAlias type="ldg.mybatis.model.Items" alias="Items" />
+		<typeAlias type="ldg.mybatis.model.Order" alias="Order" />
+		<typeAlias type="ldg.mybatis.model.Vw_order" alias="Vw_order" />
+		<typeAlias type="ldg.mybatis.model.Point" alias="Point" />
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver" />
+				<!-- <property name="url" value="jdbc:mysql://db.ceq3cleh2rgl.us-east-2.rds.amazonaws.com:3306/AWS_Project?serverTimezone=UTC" /> -->
+				<property name="url" value="jdbc:mysql://18.117.14.150:3306/AWS_Project?serverTimezone=UTC" />
+				<property name="username" value="root" />
+				<property name="password" value="root" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="ldg/mybatis/repository/mapper/MyBatisMapper.xml" />
+	</mappers>
+</configuration>

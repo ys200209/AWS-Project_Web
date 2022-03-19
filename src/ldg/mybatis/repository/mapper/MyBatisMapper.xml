@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ldg.mybatis.repository.mapper.MyBatisMapper">
+	<cache />
+
+	<sql id="BaseColumns">
+
+ 		userID,
+ 		userPassword,
+ 		userName,
+ 		userGender,
+ 		userEmail,
+ 		userJoin
+	</sql>
+
+	<insert id="insertUser" parameterType="User">
+			INSERT INTO HS_User(userID, userPassword, userName, userGender, userEmail, userJoin)
+	      VALUES (#{userID}, #{userPassword}, #{userName}, #{userGender}, #{userEmail}, NOW())
+	</insert>
+	
+	<insert id="insertPoint">
+	      INSERT INTO Point(userID, sumPrice, userPoint) VALUES(#{userID}, 0, 0)
+	</insert>
+	
+	<select id="selectUserLogin" parameterType="User" resultType="String">
+			SELECT userPassword
+	    	FROM HS_User
+	    	WHERE userID = #{userID}
+	</select> 
+	
+	<insert id="insertItems" parameterType="Items">
+		INSERT INTO Items(itemName, itemPrice, itemContent)
+		VALUES (#{itemName}, #{itemPrice}, #{itemContent})
+	</insert>
+	
+	<delete id="deleteItems" parameterType="Items">
+		DELETE FROM Items WHERE itemID = #{itemID}
+	</delete>
+	
+	<select id="shopingList" parameterType="Items" resultType="Items">
+			SELECT *
+			FROM Items
+			<if test = "itemName != null" >
+				<if test = "itemName != ''">
+					WHERE itemName REGEXP #{itemName}
+				</if>
+				<if test = "itemName == ''"></if> <!-- 아무것도 입력하지 않은채로 검색버튼을 클릭했을시. -->
+			</if>
+	</select>
+	
+	<update id="updateUserID" parameterType="HashMap">
+		UPDATE HS_User SET userID = #{userUpdateID} WHERE userID = #{userID};
+	</update>
+	
+	<update id="updateUserPassword" parameterType="HashMap">
+		UPDATE HS_User SET userPassword = #{userUpdatePassword} WHERE userID = #{userID};
+	</update>
+
+	<select id="itemView" parameterType="Items" resultType="Items">
+			SELECT *
+			FROM Items
+			WHERE itemID = #{itemID}
+	</select>
+	
+	<delete id="deleteUser" parameterType="User">
+		DELETE FROM HS_User WHERE userID = #{userID}
+	</delete>
+	
+	<insert id="buyAction" parameterType="HashMap">
+		INSERT INTO HS_Order(userID, itemID, orderDate) VALUES(#{userID}, #{itemID}, NOW())
+	</insert>
+	
+	<select id="shopingLog" parameterType="Vw_Order" resultType="Vw_Order">
+		SELECT * FROM Vw_Order ORDER BY orderID
+	</select>
+	
+	<select id="selectUserList" resultType="User">
+		SELECT * FROM HS_User WHERE userID != 'root' ORDER BY userID
+	</select>
+	
+	<select id="sumOrderPrice" parameterType="String" resultType="Object">
+		SELECT SUM(itemPrice) AS sumPrice FROM Vw_Order WHERE userID != 'root' AND userID = #{userID}
+		GROUP BY userID
+	</select>
+	
+	<select id="maxSumPrice" resultType="String">
+		SELECT userID
+		FROM (  SELECT userID, SUM(itemPrice) AS sumPrice 
+				FROM Vw_Order 
+				GROUP BY userID
+				ORDER BY sumPrice DESC ) AS t
+		LIMIT 1
+	</select>
+	
+	<select id="myBuyList" parameterType="String" resultType="Vw_Order">
+		SELECT * FROM Vw_Order WHERE userID = #{userID}
+	</select>
+	
+	<update id="updateItems" parameterType="Items">
+		UPDATE Items SET itemName = #{itemName}, itemPrice = #{itemPrice}, itemContent = #{itemContent} 
+		WHERE itemID = #{itemID}
+	</update>
+	
+	<select id="point" parameterType="HashMap">
+		UPDATE Point SET sumPrice = #{sumPrice}, userPoint = #{userPoint}
+		WHERE userID = #{userID}
+	</select>
+	
+	<select id="pushNotification" resultType="Object">
+		SELECT token FROM User
+	</select>
+	
+	<insert id="insertNotificationUser" parameterType="String">
+		INSERT INTO User(token) VALUES(#{newToken})
+	</insert>
+	
+	<select id="pushNotificationItem" resultType="String">
+		SELECT itemName FROM Items WHERE itemID = #{itemID}
+	</select>
+	
+</mapper>

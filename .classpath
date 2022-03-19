@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v9.0">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="C:/Users/Lee/Desktop/마이바티스 실습/mybatis_java(exam)/libs/asm-3.3.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lee/Desktop/마이바티스 실습/mybatis_java(exam)/libs/cglib-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lee/Desktop/마이바티스 실습/mybatis_java(exam)/libs/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lee/Desktop/마이바티스 실습/mybatis_java(exam)/libs/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lee/Desktop/마이바티스 실습/mybatis_java(exam)/libs/mybatis-3.2.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lee/Desktop/마이바티스 실습/mybatis_java(exam)/libs/slf4j-api-1.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lee/Desktop/마이바티스 실습/mybatis_java(exam)/libs/slf4j-log4j12-1.6.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Lee/Desktop/마이바티스 실습/마이바티스 홈쇼핑 프로젝트 (이세영)/MyBatis_Project/WebContent/WEB-INF/lib/mysql-connector-java-8.0.21.jar"/>
+	<classpathentry kind="output" path="build/classes"/>
+</classpath>
